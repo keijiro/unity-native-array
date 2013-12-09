@@ -8,8 +8,13 @@ public class PluginTest : MonoBehaviour
 
     int[] temp;
 
+#if UNITY_EDITOR || UNITY_STANDALONE_OSX
     [DllImport ("SamplePlugin")]
     static extern void TestFunction (int[] array, int length);
+#elif UNITY_IPHONE
+	[DllImport ("__Internal")]
+	static extern void TestFunction (int[] array, int length);
+#endif
 
     void Start ()
     {
